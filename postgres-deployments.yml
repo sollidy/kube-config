@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      components: pg
+  template:
+    metadata:
+      name: app-short
+      labels:
+        components: pg
+    spec:
+      containers:
+        - name: app-short
+          image: bitnami/postgresql:15
+          resources:
+            limits:
+              memory: '500Mi'
+              cpu: '300m'
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRESQL_DATABASE
+              value: db
+            - name: POSTGRESQL_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRESQL_USERNAME
+                  name: pg-secret
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRESQL_PASSWORD
+                  name: pg-secret
+          volumeMounts:
+            - name: pg-data
+              mountPath: /bitnami/postgresql
+              subPath: postgres
+      volumes:
+        - name: pg-data
+          persistentVolumeClaim:
+            claimName: pg-pvc
