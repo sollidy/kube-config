@@ -1,1 +1,2 @@
 postgres-secrets.yml
+kubectl/postgres-secrets.yml
