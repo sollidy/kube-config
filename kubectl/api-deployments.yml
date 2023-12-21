@@ -27,3 +27,11 @@ spec:
                 secretKeyRef:
                   key: DATABASE_URL
                   name: short-api-secret
+          volumeMounts:
+            - name: test
+              mountPath: /etc/test
+              readOnly: true
+      volumes:
+        - name: test
+          configMap:
+            name: demo-config
