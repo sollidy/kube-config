@@ -1,2 +1,3 @@
 postgres-secrets.yml
 kubectl/postgres-secrets.yml
+kubectl/api-secrets.yml

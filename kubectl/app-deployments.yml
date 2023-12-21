@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app-short
-          image: antonlarichev/short-app
+          image: antonlarichev/short-app:v1.4
           resources:
             limits:
               memory: '228Mi'

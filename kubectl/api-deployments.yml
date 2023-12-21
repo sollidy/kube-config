@@ -14,10 +14,16 @@ spec:
     spec:
       containers:
         - name: api-short
-          image: antonlarichev/short-api
+          image: antonlarichev/short-api:v1.0
           resources:
             limits:
-              memory: '228Mi'
+              memory: '528Mi'
               cpu: '200m'
           ports:
             - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: DATABASE_URL
+                  name: short-api-secret
