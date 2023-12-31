@@ -1,6 +1,21 @@
+{{- define "chart.labels"}}
+  labels: 
+    date: {{ now | htmlDate }}
+{{- end}}
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: demo-config
+  {{- template "chart.labels"}}
 data:
   key: value
+  {{- if eq .Values.env "production"}}
+  productionKey: "key"
+  {{- else}}
+  productionKey: "false"
+  {{- end}}
+  users: |-
+    {{- range $idx, $user := .Values.users }}
+    - {{ $user.name }}: {{ $user.role}} - {{ $idx}}
+    {{- end}}

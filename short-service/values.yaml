@@ -8,3 +8,11 @@ app:
   limits:
     memory: '228Mi'
     cpu: '200m'
+
+env: dev
+
+users:
+  - name: Am
+    role: admin
+  - name: Jk
+    role: user
