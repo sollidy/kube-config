@@ -9,10 +9,33 @@ app:
     memory: '228Mi'
     cpu: '200m'
 
-env: dev
+api:
+  components: backend
+  name: api-short
+  image: antonlarichev/short-api
+  imageVersion: v1.0
+  port: 3000
+  replicaCount: 1
+  limits:
+    memory: '528Mi'
+    cpu: '200m'
+  envs:
+    - DATABASE_URL
 
-users:
-  - name: Am
-    role: admin
-  - name: Jk
-    role: user
+postgres:
+  components: pg
+  name: pg
+  image: bitnami/postgresql
+  imageVersion: 15
+  port: 5432
+  replicaCount: 1
+  limits:
+    memory: '500Mi'
+    cpu: '300m'
+  envs:
+    - POSTGRESQL_USERNAME
+    - POSTGRESQL_PASSWORD
+
+db:
+  db: db
+  host: pg-clusterip

@@ -1,0 +1,2 @@
+Template app: {{ .Release.Name }} {{ .Chart.Version }}
+Deploy app: helm secrets upgrade short-service-release ./short-service -f secrets/secrets.yml 
